@@ -1,0 +1,68 @@
+<Window x:Class="AclLegibility.ConsentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource Hue.Window}"
+        Title="ἈΝΑΓΝΩΣΙΣ" Width="600"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
+
+    <Border Padding="34,28">
+        <StackPanel>
+
+            <!-- ── Greek gate ── (the serif face is deliberate: an inscription, not UI text) -->
+            <TextBlock Text="ἈΝΑΓΝΩΣΙΣ" FontSize="40" FontWeight="Bold"
+                       Foreground="{DynamicResource Brush.AccentText}" HorizontalAlignment="Center"
+                       FontFamily="Palatino Linotype, Cambria, Georgia, serif"/>
+            <TextBlock Text="γνῶθι πρὶν πράττειν" FontSize="20"
+                       Foreground="{DynamicResource Brush.TextDim}" HorizontalAlignment="Center" Margin="0,6,0,2"
+                       FontFamily="Palatino Linotype, Cambria, Georgia, serif"/>
+            <TextBlock Text="know before you act" FontStyle="Italic" HorizontalAlignment="Center"
+                       Style="{StaticResource Text.Caption}" Margin="0,0,0,18"/>
+
+            <Border Height="1" Background="{DynamicResource Brush.LineSoft}" Margin="0,0,0,18"/>
+
+            <!-- ── English text ── -->
+            <TextBlock Style="{StaticResource Text.Body}" LineHeight="20" Margin="0,0,0,12" TextWrapping="Wrap">
+                <Run FontStyle="Italic">anagnōsis</Run>
+                <Run Foreground="{DynamicResource Brush.TextMuted}">(ἀνάγνωσις) — Greek: reading; also recognition, coming to know something again.</Run>
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Foreground="{DynamicResource Brush.Text}" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8">
+                This tool reads first. Almost everything it does changes nothing.
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource Text.Body}" LineHeight="20" Margin="0,0,0,12" TextWrapping="Wrap">
+                Scanning, the tabs, snapshots and Copy for AI only read this machine. Six actions do change it, each with a
+                preview or a question first, and the permission actions save a backup you can restore. Some changes last:
+                <Run FontWeight="Bold" Foreground="{DynamicResource Brush.WarnText}">deleted leftover folders and profiles,
+                removed app versions, removed download marks, and the component store clean-up with /&#x2060;ResetBase</Run>, after
+                which installed updates can no longer be uninstalled.
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource Text.Body}" FontStyle="Italic" Margin="0,0,0,18" TextWrapping="Wrap">
+                Read the preview to the end. If it says something you don't understand, that is your answer.
+            </TextBlock>
+
+            <Border Height="1" Background="{DynamicResource Brush.LineSoft}" Margin="0,0,0,16"/>
+
+            <!-- ── Ticks ── the second one set apart, so the two cannot be ticked in one sweep -->
+            <CheckBox x:Name="ChkWant" Margin="0,0,0,10"
+                      Checked="Chk_Changed" Unchecked="Chk_Changed">
+                <TextBlock TextWrapping="Wrap" Width="490">I have read what the actions can change, and I want them available.</TextBlock>
+            </CheckBox>
+
+            <CheckBox x:Name="ChkKnow" Margin="34,6,0,22"
+                      Checked="Chk_Changed" Unchecked="Chk_Changed">
+                <TextBlock TextWrapping="Wrap" Width="456">I know what an orphaned security principal and an alternate NTFS data stream are.</TextBlock>
+            </CheckBox>
+
+            <!-- ── Buttons ── -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="BtnDecline" Content="Read only for now" Click="BtnDecline_Click" Margin="0,0,10,0"/>
+                <Button x:Name="BtnProceed" Content="Agree" Click="BtnProceed_Click"
+                        IsEnabled="False" Style="{StaticResource Hue.Button.Primary}"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>

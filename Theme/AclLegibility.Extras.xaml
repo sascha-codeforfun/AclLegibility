@@ -1,0 +1,78 @@
+<!-- AclLegibility extras on top of HueTheme kit 1.1.5 — app-owned, not a kit file.
+     Deviations taken as a shield-frame instrument; each is listed in README.md
+     ("Deviations from HueTheme") so it can be found and fed back into the kit.
+
+     APP CHANGES
+       added  App.SelectableText   read-only text that can be selected and copied (paths, SDDL, SIDs)
+       added  App.Tag.Quiet        neutral tag in muted text for Stock and Trace, so the eye skips them
+       added  Icon.Drive           a volume root; the kit has no drive icon
+       added  Icon.Link            a reparse point (junction, symlink); the kit has no link icon
+       added  App.Brush.Link       junctions and symbolic links, kit Indigo.Light (Indigo.Mid, softened, when stock)
+       added  App.LinkAware        a name row that turns indigo when its object is a link
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- APP AclLegibility: added App.SelectableText — read-only text that can be selected -->
+    <Style x:Key="App.SelectableText" TargetType="TextBox">
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="IsReadOnlyCaretVisible" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource Brush.Accent}" />
+        <Setter Property="SelectionOpacity" Value="0.45" />
+        <Setter Property="FontFamily" Value="{StaticResource Font.Ui}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource Hue.FocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="False"
+                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="App.SelectableText.Mono" TargetType="TextBox" BasedOn="{StaticResource App.SelectableText}">
+        <Setter Property="FontFamily" Value="{StaticResource Font.Mono}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+    <Style x:Key="App.SelectableText.Dim" TargetType="TextBox" BasedOn="{StaticResource App.SelectableText}">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextDim}" />
+    </Style>
+    <!-- /APP -->
+
+    <!-- APP AclLegibility: added App.Tag.Quiet — Stock and Trace read as background -->
+    <Style x:Key="App.Tag.Quiet" TargetType="ContentControl" BasedOn="{StaticResource Hue.Tag}">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextMuted}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Line}" />
+    </Style>
+    <!-- /APP -->
+
+    <!-- APP AclLegibility: added Icon.Drive, Icon.Link — same 16 grid, stroke 1.6, no fills -->
+    <Geometry x:Key="Icon.Drive">M2,5 L14,5 L14,11.5 L2,11.5 Z M10.5,8.25 L12,8.25 M4.5,8.25 L5,8.25</Geometry>
+    <Geometry x:Key="Icon.Link">M6.8,9.2 L9.2,6.8 M7.4,4.8 L8.6,3.6 A2.4,2.4 0 0 1 12.4,7.4 L11.2,8.6 M8.6,11.2 L7.4,12.4 A2.4,2.4 0 0 1 3.6,8.6 L4.8,7.4</Geometry>
+    <!-- /APP -->
+
+    <!-- APP AclLegibility: added App.Brush.Link, App.Brush.LinkMuted, App.LinkAware — links in indigo so they
+         don't drown among the other findings. Colours from the kit's Indigo family; App.xaml.cs swaps the two
+         brushes for system colours while a Windows contrast theme is on. Icon and text follow the row's
+         foreground (Hue.Icon strokes in TextElement.Foreground). -->
+    <SolidColorBrush x:Key="App.Brush.Link" Color="{StaticResource Indigo.Light}" />
+    <SolidColorBrush x:Key="App.Brush.LinkMuted" Color="{StaticResource Indigo.Mid}" Opacity="0.75" />
+    <Style x:Key="App.LinkAware" TargetType="StackPanel">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Link}" Value="Full">
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource App.Brush.Link}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Link}" Value="Muted">
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource App.Brush.LinkMuted}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <!-- /APP -->
+
+</ResourceDictionary>

@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>AclLegibility</AssemblyName>
+    <RootNamespace>AclLegibility</RootNamespace>
+    <Version>1.0.0</Version>
+    <Product>AclLegibility</Product>
+    <Description>See every permission, stream and filesystem quirk on this machine, and what's stock versus custom.</Description>
+
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+
+    <!-- Allows building on non-Windows hosts (e.g. Ubuntu with the .NET 10 SDK) -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+
+    <!-- Single self-contained file with native assemblies included -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <!-- Reproducible output: no symbols (they record source paths), no commit hash in the version. -->
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Deterministic>true</Deterministic>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\app_256.png" />
+    <Resource Include="Assets\app.ico" />
+    <None Remove="Assets\app.svg;Assets\app.png;Assets\app_1024.png" />
+    <EmbeddedResource Include="Knowledge\knowledge.json" LogicalName="AclLegibility.knowledge.json" />
+  </ItemGroup>
+
+</Project>
